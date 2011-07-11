@@ -75,18 +75,18 @@ public class Conversation<M extends Message> {
     }
 
     /**
-     *  Returns the {@code Message} at start of the {@code Conversation}.
+     *  Returns the {@code Message} at the start of the {@code Conversation}.
      *
-     *  @return the {@code Message} at start of the {@code Conversation}
+     *  @return the {@code Message} at the start of the {@code Conversation}
      */
     public M getFirst() {
         return get( 0 );
     }
 
     /**
-     *  Returns the {@code Message} at end of the {@code Conversation}.
+     *  Returns the {@code Message} at the end of the {@code Conversation}.
      *
-     *  @return the {@code Message} at end of the {@code Conversation}
+     *  @return the {@code Message} at the end of the {@code Conversation}
      */
     public M getLast() {
         return get( size() - 1 );
