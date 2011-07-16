@@ -56,6 +56,17 @@ public abstract class MessageProcessor extends Thread implements Messager {
     }
 
     /**
+     *  Responds to a {@code Message}.
+     *
+     *  @param toresp the {@code Message} to respond
+     *  @param response the response
+     */
+    protected final void respond( Message toresp, Message response ) {
+        toresp.getConversation().add( response );
+        send( toresp.getSender(), response );
+    }
+
+    /**
      *  Stores the {@code Message} in the {@code Queue}.
      *  This will be executed from the other {@code Agent} therefore it's so short.
      *  You should keep it short as well. ;-)
