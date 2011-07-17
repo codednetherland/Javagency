@@ -26,6 +26,7 @@ import codednetherland.javagency.model.Messager;
 
 /**
  *  A {@code AbstractMessage} that contains a {@code Object}.
+ *  The {@code Object} should be immutable or at least synchronized.
  *
  *  @author codednetherland <codednetherland@googlemail.com>
  *  @version 0.9
