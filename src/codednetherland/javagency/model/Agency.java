@@ -35,7 +35,7 @@ public abstract class Agency extends MessageProcessor {
     /**
      *  This holds all {@code Agents} in a {@code Map}.
      */
-    private static List<Agent> agents;
+    protected static List<Agent> agents;
     /**
      *  Shows whether the {@code Agency} is already open.
      */
