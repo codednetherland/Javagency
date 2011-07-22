@@ -22,7 +22,7 @@
 package codednetherland.javagency.model;
 
 /**
- *  The objects that will be traveling between the {@code Messagers}.
+ *  The {@code Objects} that will be traveling between the {@code Messagers}.
  *
  *  @author codednetherland <codednetherland@googlemail.com>
  *  @version 0.9
@@ -33,27 +33,21 @@ public abstract class AbstractMessage implements Message {
     /**
      *  The sender of the {@code AbstractMessage}.
      */
-    protected final Messager sender;
+    protected Messager sender;
     /**
      *  The receiver of the {@code AbstractMessage}.
      */
-    protected final Messager receiver;
+    protected Messager receiver;
     /**
      *  The {@code Conversation} object of the {@code AbstractMessage}.
      */
     protected Conversation conver;
 
     /**
-     *  The constructor of {@code AbstractMessage}.
-     *  This should always be used in child class' constructors.
-     *
-     *  @param sender the sender of the {@code AbstractMessage}
-     *  @param receiver the receiver of the {@code AbstractMessage}
+     *  The standard constructor of {@code AbstractMessage}.
      */
-    public AbstractMessage( Messager sender, Messager receiver ) {
-        this.sender = sender;
-        this.receiver = receiver;
-        this.conver = null;
+    public AbstractMessage() {
+
     }
 
     /**
@@ -65,11 +59,31 @@ public abstract class AbstractMessage implements Message {
     }
 
     /**
+     *  Sets the sender of the {@code Message} but just once.
+     *
+     *  @param sender the sender of the {@code Message}
+     */
+    public final void setSender( Messager sender ) {
+        if( this.sender == null ) this.sender = sender;
+        if( this.sender != sender ) throw new IllegalStateException( "This message has already a sender." );
+    }
+
+    /**
      *  {@inheritDoc}
      */
     @Override
     public Messager getReceiver() {
         return receiver;
+    }
+
+    /**
+     *  Sets the receiver of the {@code Message} but just once.
+     *
+     *  @param receiver the receiver of the {@code Message}
+     */
+    public final void setReceiver( Messager receiver ) {
+        if( this.receiver == null ) this.receiver = receiver;
+        if( this.receiver != receiver ) throw new IllegalStateException( "This message has already a receiver." );
     }
 
     /**

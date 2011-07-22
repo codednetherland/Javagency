@@ -26,6 +26,7 @@ import java.util.List;
 
 /**
  *  A class to respond on {@code Messages}.
+ *  This is only supposed to be between 2 {@code Messagers} for more please use {@code Agencys} like {@code Maillist}.
  *
  *  @author codednetherland <codednetherland@googlemail.com>
  *  @version 0.9
@@ -36,7 +37,7 @@ public class Conversation<M extends Message> {
     /**
      *  The history of the {@code Conversation}.
      */
-    protected List<M> msgline;
+    protected volatile List<M> msgline;
 
     /**
      *  The standard constructor.

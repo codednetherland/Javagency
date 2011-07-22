@@ -21,8 +21,6 @@
 
 package codednetherland.javagency.message;
 
-import codednetherland.javagency.model.Messager;
-
 /**
  *  A {@code ObjectMessage} that contains a {@code Exception}.
  *
@@ -37,12 +35,10 @@ public class ExceptionMessage<E extends Exception> extends ObjectMessage<E> {
     /**
      *  The constructor of {@code ExceptionMessage}.
      *
-     *  @param sender the sender of the {@code ExceptionMessage}
-     *  @param receiver the receiver of the {@code ExceptionMessage}
      *  @param except the {@code Exception} to send
      */
-    public ExceptionMessage( Messager sender, Messager receiver, E except ) {
-        super( sender, receiver, except );
+    public ExceptionMessage( E except ) {
+        super( except );
     }
 
     /**

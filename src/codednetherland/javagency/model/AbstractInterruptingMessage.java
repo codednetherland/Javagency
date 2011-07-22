@@ -22,6 +22,7 @@
 package codednetherland.javagency.model;
 
 /**
+ *  The abstract implementation of a {@code InterruptingMessage}.
  *
  *  @author codednetherland <codednetherland@googlemail.com>
  *  @version 0.9
@@ -30,13 +31,10 @@ package codednetherland.javagency.model;
 public abstract class AbstractInterruptingMessage extends AbstractMessage implements InterruptingMessage {
 
     /**
-     *  The constructor of {@code InterruptingMessage}.
-     *
-     *  @param sender the sender of the {@code InterruptingMessage}
-     *  @param receiver the receiver of the {@code InterruptingMessage}
+     *  The standard constructor of {@code InterruptingMessage}.
      */
-    public AbstractInterruptingMessage( Messager sender, Messager receiver ) {
-        super( sender, receiver );
+    public AbstractInterruptingMessage() {
+        super();
     }
 
 }

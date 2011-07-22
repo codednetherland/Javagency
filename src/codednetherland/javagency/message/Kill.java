@@ -22,7 +22,6 @@
 package codednetherland.javagency.message;
 
 import codednetherland.javagency.model.AbstractInterruptingMessage;
-import codednetherland.javagency.model.Messager;
 
 /**
  *  Stop the {@code Agent} immediately.
@@ -34,13 +33,10 @@ import codednetherland.javagency.model.Messager;
 public class Kill extends AbstractInterruptingMessage {
 
     /**
-     *  The constructor of {@code Kill}.
-     *
-     *  @param sender the sender of the {@code Kill}
-     *  @param receiver the receiver of the {@code Kill}
+     *  The standard constructor of {@code Kill}.
      */
-    public Kill( Messager sender, Messager receiver ) {
-        super( sender, receiver );
+    public Kill() {
+        super();
     }
 
 }

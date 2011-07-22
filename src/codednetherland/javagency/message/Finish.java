@@ -22,7 +22,6 @@
 package codednetherland.javagency.message;
 
 import codednetherland.javagency.model.AbstractInterruptingMessage;
-import codednetherland.javagency.model.Messager;
 
 /**
  *  Request the {@code Agent} to finish its work.
@@ -34,13 +33,10 @@ import codednetherland.javagency.model.Messager;
 public class Finish extends AbstractInterruptingMessage {
 
     /**
-     *  The constructor of {@code Finish}.
-     *
-     *  @param sender the sender of the {@code Finish}
-     *  @param receiver the receiver of the {@code Finish}
+     *  The standard constructor of {@code Finish}.
      */
-    public Finish( Messager sender, Messager receiver ) {
-        super( sender, receiver );
+    public Finish() {
+        super();
     }
 
 }

@@ -22,7 +22,6 @@
 package codednetherland.javagency.message;
 
 import codednetherland.javagency.model.AbstractMessage;
-import codednetherland.javagency.model.Messager;
 
 /**
  *  A {@code AbstractMessage} that contains a {@code Object}.
@@ -44,12 +43,9 @@ public class ObjectMessage<O extends Object> extends AbstractMessage {
     /**
      *  The constructor of {@code ObjectMessage}.
      *
-     *  @param sender the sender of the {@code ObjectMessage}
-     *  @param receiver the receiver of the {@code ObjectMessage}
      *  @param object the {@code Object} to send
      */
-    public ObjectMessage( Messager sender, Messager receiver, O object ) {
-        super( sender, receiver );
+    public ObjectMessage( O object ) {
         this.object = object;
     }
 
