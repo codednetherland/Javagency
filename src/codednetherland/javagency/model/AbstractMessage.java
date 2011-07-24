@@ -33,22 +33,15 @@ public abstract class AbstractMessage implements Message {
     /**
      *  The sender of the {@code AbstractMessage}.
      */
-    protected Messager sender;
+    private Messager sender;
     /**
      *  The receiver of the {@code AbstractMessage}.
      */
-    protected Messager receiver;
+    private Messager receiver;
     /**
      *  The {@code Conversation} object of the {@code AbstractMessage}.
      */
     protected Conversation conver;
-
-    /**
-     *  The standard constructor of {@code AbstractMessage}.
-     */
-    public AbstractMessage() {
-
-    }
 
     /**
      *  {@inheritDoc}
@@ -59,9 +52,7 @@ public abstract class AbstractMessage implements Message {
     }
 
     /**
-     *  Sets the sender of the {@code Message} but just once.
-     *
-     *  @param sender the sender of the {@code Message}
+     *  {@inheritDoc}
      */
     public final void setSender( Messager sender ) {
         if( this.sender == null ) this.sender = sender;
@@ -77,9 +68,7 @@ public abstract class AbstractMessage implements Message {
     }
 
     /**
-     *  Sets the receiver of the {@code Message} but just once.
-     *
-     *  @param receiver the receiver of the {@code Message}
+     *  {@inheritDoc}
      */
     public final void setReceiver( Messager receiver ) {
         if( this.receiver == null ) this.receiver = receiver;

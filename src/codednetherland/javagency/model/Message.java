@@ -38,12 +38,26 @@ public interface Message {
     public Messager getSender();
 
     /**
+     *  Sets the sender of the {@code Message} but should just once.
+     *
+     *  @param sender the sender of the {@code Message}
+     */
+    public void setSender( Messager sender );
+
+    /**
      *  Simply returns the receiver of the {@code Message}.
      *
      *  @return the receiver of the {@code Message}
      */
     public Messager getReceiver();
 
+    /**
+     *  Sets the receiver of the {@code Message} but should just once.
+     *
+     *  @param receiver the receiver of the {@code Message}
+     */
+    public void setReceiver( Messager receiver );
+    
     /**
      *  Simply returns the {@code Conversation} object of the {@code Message}.
      *

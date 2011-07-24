@@ -23,6 +23,7 @@ package codednetherland.javagency.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.RandomAccess;
 
 /**
  *  A class to respond on {@code Messages}.
@@ -31,8 +32,10 @@ import java.util.List;
  *  @author codednetherland <codednetherland@googlemail.com>
  *  @version 0.9
  *  @since 0.9
+ *
+ *  @param <M> the type of {@code Message} that is necessary for responses
  */
-public class Conversation<M extends Message> {
+public class Conversation<M extends Message> implements RandomAccess {
 
     /**
      *  The history of the {@code Conversation}.

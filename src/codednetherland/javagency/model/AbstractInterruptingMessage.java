@@ -30,11 +30,4 @@ package codednetherland.javagency.model;
  */
 public abstract class AbstractInterruptingMessage extends AbstractMessage implements InterruptingMessage {
 
-    /**
-     *  The standard constructor of {@code InterruptingMessage}.
-     */
-    public AbstractInterruptingMessage() {
-        super();
-    }
-
 }
