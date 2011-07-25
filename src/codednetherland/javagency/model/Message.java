@@ -22,47 +22,75 @@
 package codednetherland.javagency.model;
 
 /**
- *  An interface for {@code Messages} with which you can make any {@code Object} a {@code Message}.
+ *  The {@code Objects} that will be traveling between the {@code Messagers}.
  *
  *  @author codednetherland <codednetherland@googlemail.com>
  *  @version 0.9
  *  @since 0.9
  */
-public interface Message {
+public abstract class Message {
+
+    /**
+     *  The sender of the {@code Message}.
+     */
+    private Messager sender;
+    /**
+     *  The receiver of the {@code Message}.
+     */
+    private Messager receiver;
+    /**
+     *  The {@code Conversation} object of the {@code Message}.
+     */
+    protected Conversation conver;
 
     /**
      *  Simply returns the sender of the {@code Message}.
      *
      *  @return the sender of the {@code Message}
      */
-    public Messager getSender();
+    public Messager getSender() {
+        return sender;
+    }
 
     /**
-     *  Sets the sender of the {@code Message} but should just once.
+     *  Sets the sender of the {@code Message} but just once.
      *
      *  @param sender the sender of the {@code Message}
+     *  @throws IllegalStateException if the {@code Message} has already a sender that differ from the given sender
      */
-    public void setSender( Messager sender );
+    public final void setSender( Messager sender ) {
+        if( this.sender == null ) this.sender = sender;
+        if( this.sender != sender ) throw new IllegalStateException( "This message has already a sender." );
+    }
 
     /**
      *  Simply returns the receiver of the {@code Message}.
      *
      *  @return the receiver of the {@code Message}
      */
-    public Messager getReceiver();
+    public Messager getReceiver() {
+        return receiver;
+    }
 
     /**
-     *  Sets the receiver of the {@code Message} but should just once.
+     *  Sets the receiver of the {@code Message} but just once.
      *
      *  @param receiver the receiver of the {@code Message}
+     *  @throws IllegalStateException if the {@code Message} has already a receiver that differ from the given receiver
      */
-    public void setReceiver( Messager receiver );
-    
+    public final void setReceiver( Messager receiver ) {
+        if( this.receiver == null ) this.receiver = receiver;
+        if( this.receiver != receiver ) throw new IllegalStateException( "This message has already a receiver." );
+    }
+
     /**
      *  Simply returns the {@code Conversation} object of the {@code Message}.
      *
      *  @return the {@code Conversation} object of the {@code Message}
      */
-    public Conversation getConversation();
+    public Conversation getConversation() {
+        if( conver == null ) conver = new Conversation( this );
+        return conver;
+    }
 
 }

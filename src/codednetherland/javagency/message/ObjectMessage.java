@@ -21,10 +21,10 @@
 
 package codednetherland.javagency.message;
 
-import codednetherland.javagency.model.AbstractMessage;
+import codednetherland.javagency.model.Message;
 
 /**
- *  A {@code AbstractMessage} that contains a {@code Object}.
+ *  A {@code Message} that contains a {@code Object}.
  *  The {@code Object} should be immutable or at least synchronized.
  *
  *  @author codednetherland <codednetherland@googlemail.com>
@@ -33,7 +33,7 @@ import codednetherland.javagency.model.AbstractMessage;
  *
  *  @param <O> the type of the {@code Object} to send
  */
-public class ObjectMessage<O extends Object> extends AbstractMessage {
+public class ObjectMessage<O extends Object> extends Message {
 
     /**
      *  The {@code Object} to send.

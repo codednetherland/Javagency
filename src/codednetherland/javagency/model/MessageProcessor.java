@@ -46,13 +46,24 @@ public abstract class MessageProcessor extends Thread implements Messager {
     }
 
     /**
+     *  Sends a {@code Message}.
+     *
+     *  @param message the {@code Message} to send
+     */
+    protected final void send( Message message ) {
+        message.setSender( this );
+        message.getReceiver().receive( message );
+    }
+
+    /**
      *  Sends the {@code Message} to the {@code Messager}.
      *
      *  @param agent the {@code Agent} to send the {@code Message} to
-     *  @param message the {@code Message} to the {@code Agent}
+     *  @param message the {@code Message} to send to the {@code Messager}
      */
     protected final void send( Messager agent, Message message ) {
-        agent.receive( message );
+        message.setReceiver( agent );
+        send( message );
     }
 
     /**
@@ -62,8 +73,8 @@ public abstract class MessageProcessor extends Thread implements Messager {
      *  @param response the response
      */
     protected final void respond( Message toresp, Message response ) {
-        toresp.getConversation().add( response );
         send( toresp.getSender(), response );
+        toresp.getConversation().add( response );
     }
 
     /**

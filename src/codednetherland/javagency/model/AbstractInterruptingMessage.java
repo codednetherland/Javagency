@@ -28,6 +28,6 @@ package codednetherland.javagency.model;
  *  @version 0.9
  *  @since 0.9
  */
-public abstract class AbstractInterruptingMessage extends AbstractMessage implements InterruptingMessage {
+public abstract class AbstractInterruptingMessage extends Message implements InterruptingMessage {
 
 }
