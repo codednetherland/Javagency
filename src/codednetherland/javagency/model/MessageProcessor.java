@@ -58,7 +58,7 @@ public abstract class MessageProcessor extends Thread implements Messager {
     /**
      *  Sends the {@code Message} to the {@code Messager}.
      *
-     *  @param agent the {@code Agent} to send the {@code Message} to
+     *  @param agent the {@code Messager} to send the {@code Message} to
      *  @param message the {@code Message} to send to the {@code Messager}
      */
     protected final void send( Messager agent, Message message ) {
