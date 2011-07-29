@@ -29,8 +29,10 @@ import java.util.List;
  *  @author codednetherland <codednetherland@googlemail.com>
  *  @version 0.9
  *  @since 0.9
+ *
+ *  @param <M> the kind of {@code MessageProcessor} the 
  */
-public abstract class Agency extends MessageProcessor {
+public abstract class Agency<M extends MessageProcessor> extends MessageProcessor {
 
     /**
      *  This holds all {@code Agents} in a {@code Map}.
