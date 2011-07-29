@@ -29,6 +29,6 @@ package codednetherland.javagency.model;
  *  @version 0.9
  *  @since 0.9
  */
-public interface InterruptingMessage extends Message {
+public interface InterruptingMessage {
 
 }
