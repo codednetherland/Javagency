@@ -23,11 +23,12 @@ package codednetherland.javagency.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.RandomAccess;
 
 /**
  *  A class to respond on {@code Messages}.
  *  This is only supposed to be between 2 {@code Messagers} for more please use {@code Agencys} like {@code Maillist}.
+ *  Use this carefully because it may consume much space because the {@code Conversation} holds all {@code Messages}
+ *  in the primary memory and one {@code Message} can hold the whole {@code Conversation} in memory.
  *
  *  @author codednetherland <codednetherland@googlemail.com>
  *  @version 0.9
@@ -35,18 +36,23 @@ import java.util.RandomAccess;
  *
  *  @param <M> the type of {@code Message} that is necessary for responses
  */
-public class Conversation<M extends Message> implements RandomAccess {
+public final class Conversation<M extends Message> {
 
     /**
      *  The history of the {@code Conversation}.
      */
     protected volatile List<M> msgline;
+    /**
+     *  The two {@code Messager} that attend the {@code conversation}.
+     */
+    private Messager[] attenders;
 
     /**
      *  The standard constructor.
      */
     public Conversation() {
         msgline = new ArrayList<M>();
+        attenders = new Messager[2];
     }
 
     /**
@@ -56,7 +62,24 @@ public class Conversation<M extends Message> implements RandomAccess {
      */
     public Conversation( M m ) {
         this();
-        msgline.add( m );
+        add( m );
+    }
+
+    /**
+     *  Sets the 2 attenders but just once.
+     *
+     *  @param attend1 attender number 1
+     *  @param attend2 attender number 2
+     *  @throws IllegalStateException if the attenders are already set
+     */
+    protected synchronized final void setAttenders( Messager attend1, Messager attend2 ) {
+        if( attenders[0] != null && attenders[1] != null ) {
+            attenders[0] = attend1;
+            attenders[1] = attend2;
+        }
+        else {
+            throw new IllegalStateException( "The attenders are already set." );
+        }
     }
 
     /**
@@ -64,8 +87,11 @@ public class Conversation<M extends Message> implements RandomAccess {
      *
      *  @param m the {@code Message} to add
      */
-    public void add( M m ) {
-        msgline.add( m );
+    public synchronized void add( M m ) {
+        if( size() <= 0 ) setAttenders( m.getSender(), m.getReceiver() );
+        int curin = size() % 2;
+        if( m.getSender() == attenders[curin] ) msgline.add( m );
+        else throw new IllegalStateException( "It is not your turn to respond." );
     }
 
     /**
