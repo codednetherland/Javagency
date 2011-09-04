@@ -21,9 +21,6 @@
 
 package codednetherland.javagency.model;
 
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
-
 /**
  *  The subclass of {@code Thread} that processes {@code Messages}.
  *
@@ -36,13 +33,13 @@ public abstract class MessageProcessor extends Thread implements Messager {
     /**
      *  The mailbox of the {@code MessageProcessor}.
      */
-    protected final BlockingQueue<Message> mailbox;
+    protected final MessageList mailbox;
 
     /**
      *  Constructor for the final mailbox element.
      */
     public MessageProcessor() {
-        mailbox = new LinkedBlockingQueue<Message>();
+        mailbox = new MessageList<Message>();
     }
 
     /**
