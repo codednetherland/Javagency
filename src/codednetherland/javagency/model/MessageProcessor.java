@@ -21,6 +21,8 @@
 
 package codednetherland.javagency.model;
 
+import codednetherland.javagency.exception.MessageRejectedException;
+
 /**
  *  The subclass of {@code Thread} that processes {@code Messages}.
  *
@@ -33,13 +35,13 @@ public abstract class MessageProcessor extends Thread implements Messager {
     /**
      *  The mailbox of the {@code MessageProcessor}.
      */
-    protected final MessageList mailbox;
+    protected final MessageBox mailbox;
 
     /**
      *  Constructor for the final mailbox element.
      */
     public MessageProcessor() {
-        mailbox = new MessageList<Message>();
+        mailbox = new BlockingMessageBox<Message>();
     }
 
     /**
@@ -47,7 +49,7 @@ public abstract class MessageProcessor extends Thread implements Messager {
      *
      *  @param message the {@code Message} to send
      */
-    protected final void send( Message message ) {
+    protected final void send( Message message ) throws MessageRejectedException {
         message.setSender( this );
         message.getReceiver().receive( message );
     }
@@ -55,11 +57,11 @@ public abstract class MessageProcessor extends Thread implements Messager {
     /**
      *  Sends the {@code Message} to the {@code Messager}.
      *
-     *  @param agent the {@code Messager} to send the {@code Message} to
+     *  @param msgr the {@code Messager} to send the {@code Message} to
      *  @param message the {@code Message} to send to the {@code Messager}
      */
-    protected final void send( Messager agent, Message message ) {
-        message.setReceiver( agent );
+    protected final void send( Messager msgr, Message message ) throws MessageRejectedException {
+        message.setReceiver( msgr );
         send( message );
     }
 
@@ -69,45 +71,51 @@ public abstract class MessageProcessor extends Thread implements Messager {
      *  @param toresp the {@code Message} to respond
      *  @param response the response
      */
-    protected final void respond( Message toresp, Message response ) {
+    protected final void respond( Message toresp, Message response ) throws MessageRejectedException {
         send( toresp.getSender(), response );
         toresp.getConversation().add( response );
     }
 
     /**
      *  Stores the {@code Message} in the {@code Queue}.
-     *  This will be executed from the other {@code Agent} therefore it's so short.
+     *  This will be executed from the other {@code MessageProcessor} therefore it's so short.
      *  You should keep it short as well. ;-)
      *
      *  @param m the {@code Message} to store
      */
     @Override
-    public void receive( Message m ) {
-        mailbox.add( m );
-        if( m instanceof InterruptingMessage ) this.interrupt();
+    public void receive( Message m ) throws MessageRejectedException {
+        mailbox.putMessage( m );
     }
 
     /**
      *  Handles a {@code Message}.
-     *  This will be executed by the {@code Agent} himself.
+     *  This will be executed by the {@code MessageProcessor} himself.
      *
      *  @param m the {@code Message} to handle
      */
     protected abstract void onReceive( Message m );
 
     /**
+     *  Handles a {@code Exception} that is thrown while processing the {@code Mailbox} and {@code Messages}.
+     *
+     *  @param e the {@code Exception} to handle
+     */
+    protected abstract void onException( Exception e );
+
+    /**
      *  The method to process the {@code Queue}.
-     *  This is final because there is behavior that must be the same in every {@code Agent}.
+     *  This is final because there is behavior that must be the same in every {@code MessageProcessor}.
      */
     @Override
     public final void run() {
         while( true ) {
             try {
-                Message current = mailbox.take();
+                Message current = mailbox.takeMessage();
                 onReceive( current );
             }
-            catch ( InterruptedException e ) {
-                // this shouldn't matter
+            catch ( Exception e ) {
+                onException( e );
             }
 
         }

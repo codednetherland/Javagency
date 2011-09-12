@@ -22,21 +22,48 @@
 package codednetherland.javagency.model;
 
 import codednetherland.javagency.exception.MessageRejectedException;
+import codednetherland.javagency.exception.MessageUnavailableException;
+import java.util.concurrent.LinkedBlockingDeque;
 
 /**
- *  Represents a {@code Object} that can receive (and send) {@code Messages}.
+ *  A implementation of {@code MessageBox} that blocks while taking but .
  *
  *  @author codednetherland <codednetherland@googlemail.com>
  *  @version 0.9
  *  @since 0.9
  */
-public interface Messager {
+public class BlockingMessageBox<M extends Message> extends LinkedBlockingDeque<M> implements MessageBox<M> {
 
     /**
-     *  Receives a {@code Message} from another {@code Messager}.
-     *
-     *  @param m the {@code Message} to receive
+     *  {@inheritDoc}
      */
-    public void receive( Message m ) throws MessageRejectedException;
+    @Override
+    public void putMessage( M message ) throws MessageRejectedException {
+        try {
+            // TODO add inner if
+            if( false ) {
+                addFirst( message );
+            }
+            else {
+                addLast( message );
+            }
+        }
+        catch( Exception e ) {
+            throw new MessageRejectedException( e );
+        }
+    }
+
+    /**
+     *  {@inheritDoc}
+     */
+    @Override
+    public M takeMessage() throws MessageUnavailableException {
+        try {
+            return takeFirst();
+        }
+        catch( Exception e ) {
+            throw new MessageUnavailableException( e );
+        }
+    }
 
 }

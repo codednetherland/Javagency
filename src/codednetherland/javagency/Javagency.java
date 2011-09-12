@@ -21,6 +21,7 @@
 
 package codednetherland.javagency;
 
+import codednetherland.javagency.exception.MessageRejectedException;
 import codednetherland.javagency.model.Message;
 import codednetherland.javagency.model.Messager;
 
@@ -50,7 +51,7 @@ public final class Javagency {
      *  @param agent the {@code Agent} to send the {@code Message} to
      *  @param message the {@code Agent} to send the {@code Message}
      */
-    public static void send( Messager agent, Message message ) {
+    public static void send( Messager agent, Message message ) throws MessageRejectedException {
         agent.receive( message );
     }
 

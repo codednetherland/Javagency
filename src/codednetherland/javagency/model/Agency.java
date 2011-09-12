@@ -21,6 +21,7 @@
 
 package codednetherland.javagency.model;
 
+import codednetherland.javagency.exception.MessageRejectedException;
 import java.util.List;
 
 /**
@@ -30,7 +31,7 @@ import java.util.List;
  *  @version 0.9
  *  @since 0.9
  *
- *  @param <M> the kind of {@code MessageProcessor} the 
+ *  @param <M> the kind of {@code MessageProcessor} the
  */
 public abstract class Agency<M extends MessageProcessor> extends MessageProcessor {
 
@@ -107,7 +108,7 @@ public abstract class Agency<M extends MessageProcessor> extends MessageProcesso
      *  {@inheritDoc}
      */
     @Override
-    public final void receive( Message m ) {
+    public final void receive( Message m ) throws MessageRejectedException {
         super.receive( m );
     }
 

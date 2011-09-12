@@ -21,6 +21,8 @@
 
 package codednetherland.javagency.model;
 
+import codednetherland.javagency.exception.MessageRejectedException;
+
 /**
  *  The main class of Javagency.
  *  I don't wanted to call it Actor again (especially since it's no real
@@ -36,7 +38,7 @@ public abstract class Agent extends MessageProcessor {
      *  {@inheritDoc}
      */
     @Override
-    public final void receive( Message m ) {
+    public final void receive( Message m ) throws MessageRejectedException {
         super.receive( m );
     }
 

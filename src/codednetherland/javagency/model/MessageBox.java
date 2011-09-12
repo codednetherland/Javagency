@@ -21,7 +21,9 @@
 
 package codednetherland.javagency.model;
 
-import java.util.LinkedList;
+import codednetherland.javagency.exception.MessageRejectedException;
+import codednetherland.javagency.exception.MessageUnavailableException;
+
 
 /**
  *  This holds all {@code Messages} of the {@code MessageProcessor}.
@@ -31,9 +33,20 @@ import java.util.LinkedList;
  *  @since 0.9
  *  @see codednetherland.javagency.model.MessageProcessor
  */
-public class MessageList<M extends Message> extends LinkedList<M> {
+public interface MessageBox<M extends Message> {
 
-    public M take() throws InterruptedException {
-        
-    }
+    /**
+     *  Stores a {@code Message} in the {@code MessageBox}.
+     *
+     *  @param message the {@code Message} to store
+     */
+    public void putMessage( M message ) throws MessageRejectedException;
+
+    /**
+     *  Takes the next {@code Message}.
+     *
+     *  @return the next {@code Message}
+     */
+    public M takeMessage() throws MessageUnavailableException;
+
 }
